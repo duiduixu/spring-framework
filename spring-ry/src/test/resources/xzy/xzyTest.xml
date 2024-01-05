@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <beans>
+        <bean id="studentTest" name="student,student_xu,student_xzy" class="test.xzy.StudentTest">
+            <property name="studentId" value="1001"/>
+            <property name="studentName" value="张三"></property>
+        </bean>
+    </beans>
+</beans>
