@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd
+       ">
+<!--    <bean id="student" class="ry.aop.bak.Student"/>-->
+<!--    <bean id="studentService" class="ry.aop.bak.service.StudentService"/>-->
+<!--    <bean id="testAspect" class="ry.aop.bak.TestAspect"/>-->
+<!--    <aop:aspectj-autoproxy/>-->
+<!--    <aop:config>-->
+<!--        <aop:aspect id="beforeAspect" ref="testAspect">-->
+<!--            <aop:pointcut id="beforePointcut"-->
+<!--                          expression="execution(* ry.aop.bak.service.StudentService.*(..))" />-->
+<!--            <aop:before method="executeBefore" pointcut-ref="beforePointcut" />-->
+<!--        </aop:aspect>-->
+<!--    </aop:config>-->
+
+    <bean id="userServiceImpl" class="ry.aop.service.UserServiceImpl"/>
+    <bean id="orderServiceImpl" class="ry.aop.service.OrderServiceImpl"/>
+    <!--定义advice-->
+    <bean id="logArgsAdvice" class="ry.aop.LogArgsAdvice"/>
+    <bean id="logResultAdvcse" class="ry.aop.LogResultAdvice"/>
+
+    <!--定义advisor-->
+    <bean id="logArgsAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+        <property name="advice" ref="logArgsAdvice"/>
+        <property name="pattern" value = "ry.aop.service.*.create.*"></property>
+    </bean>
+    <bean id="logResultAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+        <property name="advice" ref="logResultAdvcse"/>
+        <property name="pattern" value = "ry.aop.service.*.query.*"></property>
+    </bean>
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+
+<!--    <bean id="userServiceProxy" class = "org.springframework.aop.framework.ProxyFactoryBean">-->
+<!--        &lt;!&ndash; 代理的接口 &ndash;&gt;-->
+<!--        <property name="proxyInterfaces">-->
+<!--            <value>ry.aop.service.UserService</value>-->
+<!--        </property>-->
+<!--        &lt;!&ndash; 具体实现 &ndash;&gt;-->
+<!--        <property name="target" ref="userServiceImpl"/>-->
+<!--        &lt;!&ndash; 拦截器 &ndash;&gt;-->
+<!--        <property name="interceptorNames">-->
+<!--            <list>-->
+<!--                <value>logArgsAdvice</value>-->
+<!--                <value>logResultAdvice</value>-->
+<!--            </list>-->
+<!--        </property>-->
+<!--    </bean>-->
+
+</beans>
